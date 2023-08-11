@@ -18,12 +18,17 @@ int main(void)
 	{
 		write(STDOUT_FILENO, "PaShell $ ", 10);
 
-		char command[100];
+		char input[100];
 
-		if (fgets(command, sizeof(command), stdin) == NULL)
+		if (fgets(input, sizeof(input), stdin) == NULL)
 			break;
 
-		command[strcspn(command, "\n")] = '\0';
+		input[strcspn(input, "\n")] = '\0';
+
+		char *command = strtok(input, " ");
+
+		if (command == NULL)
+			continue;
 
 		pid_t pid = fork();
 
