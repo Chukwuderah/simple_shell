@@ -1,3 +1,4 @@
+#include "functions.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -27,20 +28,19 @@ int main(void)
 		if (input[input_length - 1] == '\n')
 			input[--input_length] = '\0';
 
-		char *command = strtok(input, " ");
+		char *args[MAX_ARGS];
+		int arg_count = tokenize_input(input, args);
 
-		if (!command)
+		if (arg_count == 0)
 			continue;
 
 		pid_t pid = fork();
 
 		if (pid == 0)
 		{
-			char *args[] = {command, NULL};
+			execvp(args[0], args);
 
-			execve(command, args, NULL);
-
-			perror("PaShell: ");
+			perror("PaShell");
 			_exit(EXIT_FAILURE);
 		}
 		else if (pid < 0)
