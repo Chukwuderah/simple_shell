@@ -18,12 +18,14 @@ int main(void)
 	{
 		write(STDOUT_FILENO, "PaShell $ ", 10);
 
-		char input[100];
+		char input[400];
 
-		if (fgets(input, sizeof(input), stdin) == NULL)
+		ssize_t input_length = read(STDIN_FILENO, input, sizeof(input));
+		if (input_length <= 0)
 			break;
 
-		input[strcspn(input, "\n")] = '\0';
+		if (input_length > 0 && input[input_length - 1] == '\n')
+			input[input_length - 1] = '\0';
 
 		char *command = strtok(input, " ");
 
@@ -38,10 +40,15 @@ int main(void)
 
 			execve(command, args, NULL);
 
-			char error_message[400];
-
-			snprintf(error_message, sizeof(error_message), "%s: ", command);
-			perror(error_message);
+			write(STDERR_FILENO, "PaShell: ", 9);
+			char *cmd_ptr = command;
+			while (*cmd_ptr != '\0')
+			{
+				write(STDERR_FILENO, cmd_ptr, 1);
+				cmd_ptr++;
+			}
+			write(STDERR_FILENO, ": ", 2);
+			perror("");
 			_exit(EXIT_FAILURE);
 		}
 		else if (pid < 0)
