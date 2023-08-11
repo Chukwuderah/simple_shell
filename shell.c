@@ -33,7 +33,7 @@ int main(void)
 
 			execve(command, args, NULL);
 
-			char error_message[100];
+			char error_message[400];
 
 			snprintf(error_message, sizeof(error_message), "%s: ", command);
 			perror(error_message);
