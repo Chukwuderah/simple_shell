@@ -18,18 +18,18 @@ int main(void)
 	{
 		write(STDOUT_FILENO, "PaShell $ ", 10);
 
-		char input[400];
-
+		char input[100];
 		ssize_t input_length = read(STDIN_FILENO, input, sizeof(input));
+
 		if (input_length <= 0)
 			break;
 
-		if (input_length > 0 && input[input_length - 1] == '\n')
-			input[input_length - 1] = '\0';
+		if (input[input_length - 1] == '\n')
+			input[--input_length] = '\0';
 
 		char *command = strtok(input, " ");
 
-		if (command == NULL)
+		if (!command)
 			continue;
 
 		pid_t pid = fork();
@@ -41,24 +41,23 @@ int main(void)
 			execve(command, args, NULL);
 
 			write(STDERR_FILENO, "PaShell: ", 9);
-			char *cmd_ptr = command;
-			while (*cmd_ptr != '\0')
-			{
+
+			for (char *cmd_ptr = command; *cmd_ptr; cmd_ptr++)
 				write(STDERR_FILENO, cmd_ptr, 1);
-				cmd_ptr++;
-			}
+
 			write(STDERR_FILENO, ": ", 2);
 			perror("");
 			_exit(EXIT_FAILURE);
 		}
 		else if (pid < 0)
 		{
-			perror("PaShell");
+			write(STDERR_FILENO, "PaShell: Unable to launch sibling process\n", 43);
 		}
 		else
 		{
 			wait(NULL);
 		}
 	}
+
 	return (0);
 }
