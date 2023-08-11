@@ -40,13 +40,7 @@ int main(void)
 
 			execve(command, args, NULL);
 
-			write(STDERR_FILENO, "PaShell: ", 9);
-
-			for (char *cmd_ptr = command; *cmd_ptr; cmd_ptr++)
-				write(STDERR_FILENO, cmd_ptr, 1);
-
-			write(STDERR_FILENO, ": ", 2);
-			perror("");
+			perror("PaShell: ");
 			_exit(EXIT_FAILURE);
 		}
 		else if (pid < 0)
