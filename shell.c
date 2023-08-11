@@ -5,53 +5,45 @@
 #include <sys/wait.h>
 
 /**
- * main - Simple UNIX command line interpreter
+ * main - PaShell: Simplified Unix Command Line Interpreter
  *
  * Description:
- * Displays a prompt, waits for user input,
- * and executes simple one-word commands.
- * The prompt is redisplayed after each command.
+ * This Simple Shell was built as part of an ALX Project.
  *
- * Return: Always 0.
+ * Return: 0, if code ran successfully.
  */
-
 int main(void)
 {
-	while (1)
-	{
-		printf("PaShell $ ");
+    while (1)
+    {
+        write(STDOUT_FILENO, "PaShell $ ", 10);
 
-		/* Read user input */
-		char command[100];
+        char command[100];
+        if (fgets(command, sizeof(command), stdin) == NULL)
+            break;
 
-		if (fgets(command, sizeof(command), stdin) == NULL)
-			break; /* End of file (Ctrl+D) detected */
+        command[strcspn(command, "\n")] = '\0';
 
-		command[strcspn(command, "\n")] = '\0';
+        pid_t pid = fork();
 
-		/* Create a child process */
-		pid_t pid = fork();
+        if (pid == 0)
+        {
+            char *args[] = {command, NULL};
+            execve(command, args, NULL);
 
-		if (pid == 0) /* We're the child process */
-		{
-			/* Execute the command using execve */
-			char *args[] = {command, NULL};
-
-			execve(command, args, NULL);
-
-			/* If we're here, something went wrong */
-			perror("simple_shell");
-			exit(EXIT_FAILURE);
-		}
-		else if (pid < 0) /* Forking didn't go as planned */
-		{
-			perror("simple_shell");
-		}
-		else /* We're the parent process */
-		{
-			wait(NULL); /* Wait for the child to finish its business */
-		}
-	}
-
-	return (0);
+            char error_message[100];
+            snprintf(error_message, sizeof(error_message), "%s: ", command);
+            perror(error_message);
+            _exit(EXIT_FAILURE);
+        }
+        else if (pid < 0)
+        {
+            perror("PaShell");
+        }
+        else
+        {
+            wait(NULL);
+        }
+    }
+    return (0);
 }
