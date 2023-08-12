@@ -12,5 +12,5 @@ Steps To Take...
 7. Using Your Simple Shell
 You can now enter commands like you would in a regular terminal. Your simple shell will execute basic commands and handle built-in functionalities.
 
-Conclusion
+Conclusion:
 At this point, you've successfully created a simple shell that can execute basic commands and can handle built-in functionalites.
