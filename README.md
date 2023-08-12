@@ -1,8 +1,8 @@
-Alx 0x16-simple shell project
+# Alx 0x16-simple shell project
 
-Building a simple shell using C programming language that actually works. A shell is a command-line interface that allows users to interact with an operating system by entering commands. Our simple shell will be capable of executing basic commands and handling some built in functionalities.
+A shell is a command-line interface that allows users to interact with an operating system by entering commands. Our simple shell will be capable of executing basic commands and handling some built in functionalities.
 
-Steps To Take...
+### How to build a shell
 1. Setting Up A Project i.e creating a new directory for your shell project, thereby keeping it organized.
 2. Creating The Main Source Page: Using preferred text editor (e.g., vi, emacs, vim...)
 3. Parsing and Executing Commands: Inside the while loop in main(), you can parse and execute the entered commands. Use the fork(), execvp(), and wait() system calls for this purpose.
