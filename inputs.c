@@ -3,8 +3,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include "functions.h"
 
-#define MAX_ARGS 10
 
 /**
  * tokenize_input - Tokenize the input string into arguments.
@@ -28,4 +28,21 @@ int tokenize_input(char *input, char *args[])
 	args[arg_count] = NULL;
 
 	return (arg_count);
+}
+
+char _getenv(const char *name)
+{
+	char **env = environ;
+
+	while (*env != NULL)
+	{
+		if (strncmp(*env, name, strlen(name)) == 0 && (*env)[strlen(name)] == '=')
+		{
+			return (&((*env)[strlen(name) + 1]));
+		}
+
+		env++;
+	}
+
+	return (NULL);
 }
