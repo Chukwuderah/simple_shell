@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include "functions.h"
+#include <stdbool.h>
 
 
 /**
@@ -30,19 +31,27 @@ int tokenize_input(char *input, char *args[])
 	return (arg_count);
 }
 
-char _getenv(const char *name)
-{
-	char **env = environ;
+bool find_command(char *command) {
+	char *path = _getenv("PATH");
 
-	while (*env != NULL)
+	if (path != NULL)
 	{
-		if (strncmp(*env, name, strlen(name)) == 0 && (*env)[strlen(name)] == '=')
-		{
-			return (&((*env)[strlen(name) + 1]));
-		}
+		char *dir = strtok(path, ":");
 
-		env++;
+		while (dir != NULL)
+		{
+			char executable_path[256];
+
+			_strcpy(executable_path, dir);
+			_strcat(executable_path, "/");
+			_strcat(executable_path, command);
+
+			if (access(executable_path, X_OK) == 0)
+				return (true);
+
+			dir = strtok(NULL, ":");
+		}
 	}
 
-	return (NULL);
+	return (false);
 }
