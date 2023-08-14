@@ -59,9 +59,9 @@ int _strcmp(const char *str1, const char *str2) {
 /**
  * _strncmp - Custom string comparison function that emulates the behavior of strncmp.
  *
- * @param s1 The first string to compare.
- * @param s2 The second string to compare.
- * @param n The maximum number of characters to compare.
+ * @s1 The first string to compare.
+ * @s2 The second string to compare.
+ * @n The maximum number of characters to compare.
  * Return: An integer less than, equal to, or greater than zero if s1 is found,
  *         respectively, to be less than, to match, or be greater than s2.
  */
@@ -76,4 +76,24 @@ int _strncmp(const char *s1, const char *s2, size_t n)
 	}
 
 	return (0);
+}
+
+/**
+ * _strcat - Custom string concatenation function that appends the contents of
+ * the source string to the end of the destination string.
+ *
+ * @dest: The destination string.
+ * @src: The source string.
+ */
+
+void _strcat(char *dest, const char *src) {
+    while (*dest != '\0') {
+        dest++;
+    }
+    while (*src != '\0') {
+        *dest = *src;
+        dest++;
+        src++;
+    }
+    *dest = '\0';
 }
