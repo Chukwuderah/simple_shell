@@ -5,6 +5,8 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <string.h>
+#include <stdbool.h>
+#include "functions.h"
 
 /**
  * _strlen - Replacement strlen function
@@ -40,7 +42,7 @@ void _strcpy(char *dest, const char *src)
 }
 
 /**
- * _strncmp - Replacement strncmp function
+ * _strcmp - Replacement strcmp function
  * Returns 0 if the strings are the same
  */
 
@@ -52,4 +54,26 @@ int _strcmp(const char *str1, const char *str2) {
 	}
 
 	return ((unsigned char)*str1 - (unsigned char)*str2);
+}
+
+/**
+ * _strncmp - Custom string comparison function that emulates the behavior of strncmp.
+ *
+ * @param s1 The first string to compare.
+ * @param s2 The second string to compare.
+ * @param n The maximum number of characters to compare.
+ * Return: An integer less than, equal to, or greater than zero if s1 is found,
+ *         respectively, to be less than, to match, or be greater than s2.
+ */
+int _strncmp(const char *s1, const char *s2, size_t n) 
+{
+	for (size_t i = 0; i < n; ++i)
+	{
+		if (s1[i] != s2[i] || s1[i] == '\0') 
+		{
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		}
+	}
+
+	return (0);
 }
