@@ -30,8 +30,14 @@ int tokenize_input(char *input, char *args[])
 
 	return (arg_count);
 }
+/**
+ * find_command - checks path for command
+ * @command: command to be entered
+ * Return: True if command was foun, false if not
+ */
 
-bool find_command(char *command) {
+bool find_command(char *command)
+{
 	char *path = _getenv("PATH");
 
 	if (path != NULL)

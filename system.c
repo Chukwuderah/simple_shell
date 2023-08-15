@@ -8,19 +8,25 @@
 #include <string.h>
 #include <stdbool.h>
 
+/**
+ * _getenv - Replacement for the getenv function
+ * @name: name of the environment variable to find
+ * Return: The environment variables
+ */
+
 char _getenv(const char *name)
 {
-        char **env = environ;
+	char **env = environ;
 
-        while (*env != NULL)
-        {
-                if (strncmp(*env, name, strlen(name)) == 0 && (*env)[strlen(name)] == '=')
-                {
-                        return (&((*env)[strlen(name) + 1]));
-                }
+	while (*env != NULL)
+	{
+		if (strncmp(*env, name, strlen(name)) == 0 && (*env)[strlen(name)] == '=')
+		{
+			return (&((*env)[strlen(name) + 1]));
+		}
 
-                env++;
-        }
+		env++;
+	}
 
-        return (NULL);
+	return (NULL);
 }

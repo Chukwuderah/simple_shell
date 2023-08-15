@@ -10,6 +10,7 @@
 
 /**
  * _strlen - Replacement strlen function
+ * @str: string with characters to count
  * Return: the string length
  */
 
@@ -17,7 +18,8 @@ int _strlen(const char *str)
 {
 	int len = 0;
 
-	while (str[len] != '\0') {
+	while (str[len] != '\0')
+	{
 		len++;
 	}
 
@@ -26,6 +28,8 @@ int _strlen(const char *str)
 
 /**
  * _strcpy - Replacement strcpy function
+ * @dest: The string to copy to
+ * @src: The string to be copied
  */
 
 void _strcpy(char *dest, const char *src)
@@ -43,10 +47,13 @@ void _strcpy(char *dest, const char *src)
 
 /**
  * _strcmp - Replacement strcmp function
- * Returns 0 if the strings are the same
+ * @str1: A string to compare
+ * @str2: A string to compare
+ * Return: 0 if the strings are the same
  */
 
-int _strcmp(const char *str1, const char *str2) {
+int _strcmp(const char *str1, const char *str2)
+{
 	while (*str1 && *str2 && *str1 == *str2)
 	{
 		str1++;
@@ -57,19 +64,21 @@ int _strcmp(const char *str1, const char *str2) {
 }
 
 /**
- * _strncmp - Custom string comparison function that emulates the behavior of strncmp.
+ * _strncmp - Custom string comparison function
+ * that emulates the behavior of strncmp.
  *
- * @s1 The first string to compare.
- * @s2 The second string to compare.
- * @n The maximum number of characters to compare.
+ * @s1: The first string to compare.
+ * @s2: The second string to compare.
+ * @n: The maximum number of characters to compare.
  * Return: An integer less than, equal to, or greater than zero if s1 is found,
  *         respectively, to be less than, to match, or be greater than s2.
  */
-int _strncmp(const char *s1, const char *s2, size_t n) 
+
+int _strncmp(const char *s1, const char *s2, size_t n)
 {
 	for (size_t i = 0; i < n; ++i)
 	{
-		if (s1[i] != s2[i] || s1[i] == '\0') 
+		if (s1[i] != s2[i] || s1[i] == '\0')
 		{
 			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		}
@@ -86,14 +95,18 @@ int _strncmp(const char *s1, const char *s2, size_t n)
  * @src: The source string.
  */
 
-void _strcat(char *dest, const char *src) {
-    while (*dest != '\0') {
-        dest++;
-    }
-    while (*src != '\0') {
-        *dest = *src;
-        dest++;
-        src++;
-    }
-    *dest = '\0';
+void _strcat(char *dest, const char *src)
+{
+	while (*dest != '\0')
+	{
+		dest++;
+	}
+
+	while (*src != '\0')
+	{
+		*dest = *src;
+		dest++;
+		src++;
+	}
+	*dest = '\0';
 }
