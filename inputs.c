@@ -36,28 +36,52 @@ int tokenize_input(char *input, char *args[])
  * Return: True if command was foun, false if not
  */
 
-bool find_command(char *command)
+bool find_command(const char *command)
 {
-	char *path = _getenv("PATH");
+    if (access(command, X_OK) == 0)
+    {
+        printf("This is a command called %s.\n", command);
+        return true;
+    }
 
-	if (path != NULL)
-	{
-		char *dir = strtok(path, ":");
+    char *path = _getenv("PATH");
+    printf("PATH: %s\n", path);
 
-		while (dir != NULL)
-		{
-			char executable_path[256];
+    if (path != NULL)
+    {
+        printf("Searching for command: %s\n", command);
 
-			_strcpy(executable_path, dir);
-			_strcat(executable_path, "/");
-			_strcat(executable_path, command);
+        int num_tokens = 0;
+        char **dirs = _strtok(path, ':', &num_tokens);
+	char executable_path[256] = "";
 
-			if (access(executable_path, X_OK) == 0)
-				return (true);
+        for (int i = 0; i < num_tokens; i++)
+        {
+            _strcpy(executable_path, dirs[i]);
+            _strcat(executable_path, "/");
+            _strcat(executable_path, command);
 
-			dir = strtok(NULL, ":");
-		}
-	}
+            printf("Checking path: %s\n", executable_path);
 
-	return (false);
+            if (access(executable_path, X_OK) == 0)
+            {
+                printf("Command found: %s\n", executable_path);
+                free_dir_tokens(dirs, num_tokens);
+                return true;
+            }
+        }
+
+        free_dir_tokens(dirs, num_tokens);
+    }
+
+    return false;
+}
+
+void free_dir_tokens(char **dirs, int num_tokens)
+{
+    for (int j = 0; j < num_tokens; j++)
+    {
+        free(dirs[j]);
+    }
+    free(dirs);
 }

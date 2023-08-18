@@ -14,19 +14,22 @@
  * Return: The environment variables
  */
 
-char _getenv(const char *name)
+char *_getenv(const char *name)
 {
 	char **env = environ;
+	int i;
 
-	while (*env != NULL)
+	printf("Getting environment variable: %s\n", name);
+
+	for (i = 0; env[i] != NULL; i++)
 	{
-		if (strncmp(*env, name, strlen(name)) == 0 && (*env)[strlen(name)] == '=')
+		if (_strncmp(env[i], name, _strlen(name)) == 0)
 		{
-			return (&((*env)[strlen(name) + 1]));
+			return (&(env[i][strlen(name) + 1]));
 		}
 
 		env++;
 	}
-
+	printf("Environment variable %s not found. Returning Null.\n", name);
 	return (NULL);
 }

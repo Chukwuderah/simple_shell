@@ -28,28 +28,27 @@ int main(void)
 		if (input[input_length - 1] == '\n')
 			input[--input_length] = '\0';
 
-		char *args[MAX_ARGS];
-		int arg_count = tokenize_input(input, args);
+		char input_copy[100];
+		_strcpy(input_copy, input);
 
+		char *args[MAX_ARGS];
+		int arg_count = tokenize_input(input_copy, args);
 		if (arg_count == 0)
 			continue;
 
-		pid_t pid = fork();
-
-		if (pid == 0)
+		if (find_command(args[0]))
 		{
-			execvp(args[0], args);
-
-			perror("PaShell");
-			_exit(EXIT_FAILURE);
+			printf("This is a command, and it's getting here! The execute command is getting called! %i\n", find_command(args[0]));
+			execute_command(args);
 		}
-		else if (pid < 0)
+		else if (access(args[0], X_OK) == 0)
 		{
-			write(STDERR_FILENO, "PaShell: Unable to launch sibling process\n", 43);
+			printf("This is a path! It will be found!");
+			execute_path(args);
 		}
 		else
-		{
-			wait(NULL);
+ 		{
+			write(STDERR_FILENO, "Command not found, how sad.\n", 29);
 		}
 	}
 
