@@ -45,6 +45,21 @@ void _strcpy(char *dest, const char *src)
 	dest[i] = '\0';
 }
 
+void _strncpy(char *dest, const char *src, size_t n)
+{
+    size_t i;
+
+    for (i = 0; i < n && src[i] != '\0'; i++)
+    {
+        dest[i] = src[i];
+    }
+
+    for (; i < n; i++)
+    {
+        dest[i] = '\0';
+    }
+}
+
 /**
  * _strcmp - Replacement strcmp function
  * @str1: A string to compare
@@ -109,72 +124,4 @@ void _strcat(char *dest, const char *src)
 		src++;
 	}
 	*dest = '\0';
-}
-
-char **_strtok(const char *str, char delimiter, int *num_tokens) {
-    int token_count = 0;
-    char **tokens = NULL;
-    const char *start = str;
-    const char *end = str;
-
-
-    while (*end) {
-        if (*end == delimiter) {
-            if (end > start) {
-                token_count++;
-            }
-            start = end + 1;
-        }
-        end++;
-    }
-
-    if (end > start) {
-        token_count++;
-    }
-
-    *num_tokens = token_count;
-
-    if (token_count == 0) {
-        return NULL;
-    }
-
-    tokens = (char **)malloc(token_count * sizeof(char *));
-    if (tokens == NULL) {
-        perror("Memory allocation error");
-        exit(EXIT_FAILURE);
-    }
-
-
-    token_count = 0;
-    start = str;
-    end = str;
-
-    while (*end) {
-        if (*end == delimiter) {
-            if (end > start) {
-                int token_length = end - start;
-                tokens[token_count] = (char *)malloc((token_length + 1) * sizeof(char));
-                if (tokens[token_count] == NULL) {
-                    perror("Memory allocation error");
-                    exit(EXIT_FAILURE);
-                }
-                _strcpy(tokens[token_count], start);
-                token_count++;
-            }
-            start = end + 1;
-        }
-        end++;
-    }
-
-    if (end > start) {
-        int token_length = end - start;
-        tokens[token_count] = (char *)malloc((token_length + 1) * sizeof(char));
-        if (tokens[token_count] == NULL) {
-            perror("Memory allocation error");
-            exit(EXIT_FAILURE);
-        }
-        _strcpy(tokens[token_count], start);
-    }
-
-    return tokens;
 }

@@ -52,7 +52,7 @@ bool find_command(const char *command)
         printf("Searching for command: %s\n", command);
 
         int num_tokens = 0;
-        char **dirs = _strtok(path, ':', &num_tokens);
+        char **dirs = _strtok(path, ":");
 	char executable_path[256] = "";
 
         for (int i = 0; i < num_tokens; i++)
@@ -79,9 +79,5 @@ bool find_command(const char *command)
 
 void free_dir_tokens(char **dirs, int num_tokens)
 {
-    for (int j = 0; j < num_tokens; j++)
-    {
-        free(dirs[j]);
-    }
-    free(dirs);
+    free_tokens(dirs);
 }
