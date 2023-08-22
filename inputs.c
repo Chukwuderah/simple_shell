@@ -55,6 +55,15 @@ bool find_command(const char *command)
 		char **dirs = _strtok(path, ":");
 		char executable_path[256] = "";
 
+		printf("dirs: ");
+
+		for (int i = 0; dirs[i] != NULL; i++)
+		{
+			printf("[%s]", dirs[i]);
+			num_tokens++;
+		}
+		printf("\n");
+
 		for (int i = 0; i < num_tokens; i++)
 		{
 			_strcpy(executable_path, dirs[i]);

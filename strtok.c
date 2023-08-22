@@ -75,7 +75,7 @@ char **_strtok(char *line, char *delim)
 
     for (t = 0; t < tokens; t++)
     {
-        while (*line == *delim)
+        while (_strchr(delim, *line) != NULL)
             line++;
 
         letters = token_len(line, delim);
@@ -110,7 +110,7 @@ int count_tokens(char *str, char *delim)
 
     while (*str)
     {
-        if (*str == *delim)
+        if (_strchr(delim, *str) != NULL)
         {
             in_token = 0;
         }

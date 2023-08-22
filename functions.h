@@ -11,6 +11,7 @@ extern char **environ;
 #include <stdlib.h>
 
 void _strncpy(char *dest, const char *src, size_t n);
+char *_strchr(char *string, char character);
 void free_tokens(char **tokens);
 void free_dir_tokens(char **dirs, int num_tokens);
 int token_len(char *str, char *delim);
