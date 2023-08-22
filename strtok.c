@@ -119,25 +119,25 @@ char **_strtok(char *line, char *delim)
 int count_tokens(char *str, char *delim)
 {
 <<<<<<< HEAD
-    int tokens = 0;
-    int in_token = 0;
+	int tokens = 0;
+int in_token = 0;
 
-    while (*str)
-    {
-        if (_strchr(delim, *str) != NULL)
-        {
-            in_token = 0;
-        }
-        else if (!in_token)
-        {
-            in_token = 1;
-            tokens++;
-        }
+while (*str)
+{
+	if (_strchr(delim, *str) != NULL)
+	{
+		in_token = 0;
+	}
+	else if (!in_token)
+	{
+		in_token = 1;
+		tokens++;
+	}
 
-        str++;
-    }
+	str++;
+}
 
-    return tokens;
+return tokens;
 =======
 	int tokens = 0;
 	int in_token = 0;
