@@ -27,7 +27,11 @@ execute(args, environ);
 }
 
 /**
- * execute - 
+ * execute - Function that executes command line argument
+ * @args: The list of command line arguments
+ * @envp: The environment variables to search through
+ */
+
 void execute(char *args[], char *envp[])
 {
 pid_t pid = fork();
