@@ -13,6 +13,7 @@
 *
 * Return: 0, if code ran successfully.
 */
+
 int main(void)
 {
 	while (1)
@@ -29,16 +30,19 @@ int main(void)
 			input[--input_length] = '\0';
 
 		char input_copy[100];
+
 		_strcpy(input_copy, input);
 
 		char *args[MAX_ARGS];
 		int arg_count = tokenize_input(input_copy, args);
+
 		if (arg_count == 0)
 			continue;
 
 		if (find_command(args[0]))
 		{
-			printf("This is a command, and it's getting here! The execute command is getting called! %i\n", find_command(args[0]));
+			printf("This is a command, and it's getting here! The execute command
+					is getting called! %i\n", find_command(args[0]));
 			execute_command(args);
 		}
 		else if (access(args[0], X_OK) == 0)
@@ -47,7 +51,7 @@ int main(void)
 			execute_path(args);
 		}
 		else
- 		{
+		{
 			write(STDERR_FILENO, "Command not found, how sad.\n", 29);
 		}
 	}
