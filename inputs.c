@@ -29,6 +29,7 @@ int tokenize_input(char *input, char *args[])
 
 	return (arg_count);
 }
+
 /**
  * find_command - checks path for command
  * @command: command to be entered
@@ -54,7 +55,7 @@ bool find_command(const char *command)
 		int num_tokens = 0;
 		char **dirs = _strtok(path, ":");
 		char executable_path[256] = "";
-
+		
 		for (int i = 0; i < num_tokens; i++)
 		{
 			_strcpy(executable_path, dirs[i]);
@@ -79,11 +80,11 @@ bool find_command(const char *command)
 
 /**
  * free_dir_tokens - Frees the strtok tokens
- * @dir: The list of tokens
+ * @dirs: The list of tokens
  * @num_tokens: The number of tokens to be freed
  */
 
 void free_dir_tokens(char **dirs, int num_tokens)
 {
-    free_tokens(dirs);
+	free_tokens(dirs);
 }

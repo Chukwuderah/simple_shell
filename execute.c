@@ -6,32 +6,44 @@
 #include <sys/wait.h>
 #include "functions.h"
 
+/**
+ * execute_command - Execute command
+ * @args: list of command line argument
+ */
+
 void execute_command(char *args[])
 {
-    execute(args, environ);
+execute(args, environ);
 }
+
+/**
+ * execute_path - Execute path
+ * @args: list of command line argument
+ */
 
 void execute_path(char *args[])
 {
-    execute(args, environ);
+execute(args, environ);
 }
 
+/**
+ * execute - 
 void execute(char *args[], char *envp[])
 {
-    pid_t pid = fork();
+pid_t pid = fork();
 
-    if (pid == 0)
-    {
-        execve(args[0], args, envp);
-        perror("PaShell");
-        _exit(EXIT_FAILURE);
-    }
-    else if (pid < 0)
-    {
-        write(STDERR_FILENO, "PaShell: Unable to launch sibling process\n", 43);
-    }
-    else
-    {
-        wait(NULL);
-    }
+if (pid == 0)
+{
+execve(args[0], args, envp);
+perror("PaShell");
+_exit(EXIT_FAILURE);
+}
+else if (pid < 0)
+{
+write(STDERR_FILENO, "PaShell: Unable to launch sibling process\n", 43);
+}
+else
+{
+wait(NULL);
+}
 }
