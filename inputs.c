@@ -88,11 +88,11 @@ bool find_command(const char *command)
 
 /**
  * free_dir_tokens - Frees the strtok tokens
- * @dir: The list of tokens
+ * @dirs: The list of tokens
  * @num_tokens: The number of tokens to be freed
  */
 
 void free_dir_tokens(char **dirs, int num_tokens)
 {
-    free_tokens(dirs);
+	free_tokens(dirs);
 }
