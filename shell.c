@@ -49,7 +49,7 @@ int main(void)
 		}
 		else
 		{
-			write(STDERR_FILENO, "Command not found.\n", sizeof("Command not found.\n") - 1);
+			write(STDERR_FILENO, "Command not found.\n", 19);
 		}
 	}
 
