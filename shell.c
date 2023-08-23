@@ -43,6 +43,8 @@ int main(void)
 		{
 			exit_shell();
 		}
+		else if (_strcmp(args[0], "env") == 0)
+			print_environment();
 		else if (find_command(args[0]) || access(args[0], X_OK) == 0)
 		{
 			execute_command(args);

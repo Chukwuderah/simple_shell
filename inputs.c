@@ -17,14 +17,14 @@
 int tokenize_input(char *input, char *args[])
 {
 	int arg_count = 0;
-	char **token;
+	char *token;
 
-	token = _strtok(input, " ");
+	token = strtok(input, " ");
 
 	while (token != NULL && arg_count < MAX_ARGS - 1)
 	{
-		args[arg_count++] = *token;
-		token = _strtok(NULL, " ");
+		args[arg_count++] = token;
+		token = strtok(NULL, " ");
 	}
 
 	args[arg_count] = NULL;
@@ -49,12 +49,15 @@ bool find_command(const char *command)
 	if (path != NULL)
 	{
 		int num_tokens = 0;
-		char **dirs = _strtok(path, ":");
+		char *dirs[256];
+		char *token = strtok(path, ":");
 		char executable_path[256] = "";
 
-		for (int i = 0; dirs[i] != NULL; i++)
+		while (token != NULL && num_tokens < 256)
 		{
+			dirs[num_tokens] = token;
 			num_tokens++;
+			token = strtok(NULL, ":");
 		}
 
 		for (int i = 0; i < num_tokens; i++)
@@ -65,12 +68,9 @@ bool find_command(const char *command)
 
 			if (access(executable_path, X_OK) == 0)
 			{
-				free_dir_tokens(dirs, num_tokens);
 				return (true);
 			}
 		}
-
-		free_dir_tokens(dirs, num_tokens);
 	}
 
 	return (false);

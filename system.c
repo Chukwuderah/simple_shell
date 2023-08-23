@@ -35,11 +35,25 @@ char *_getenv(const char *name)
 /**
  * exit_shell - Exit the shell.
  * This function implements the built-in 'exit' command to exit the shell.
- *
- * Return: This function does not return a value.
  */
 
 void exit_shell(void)
 {
 	exit(0);
+}
+
+/**
+ * print_environment - Prints the current environment variables.
+ */
+
+void print_environment(void)
+{
+	char **env = environ;
+	int i;
+
+	for (i = 0; env[i] != NULL; i++)
+	{
+		write(STDOUT_FILENO, env[i], _strlen(env[i]));
+		write(STDOUT_FILENO, "\n", 1);
+	}
 }
