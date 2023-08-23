@@ -2,7 +2,7 @@
 #include <stddef.h>
 
 /**
- * _strchr - checks if char exists in string
+ * _strchr - checks if character exists in string
  * @string: parameter
  * @character: parameter
  * Return: Always 0 (Success)

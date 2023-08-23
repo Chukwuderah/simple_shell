@@ -32,7 +32,14 @@ char *_getenv(const char *name)
 	return (NULL);
 }
 
-void exit_shell()
+/**
+ * exit_shell - Exit the shell.
+ * This function implements the built-in 'exit' command to exit the shell.
+ *
+ * Return: This function does not return a value.
+ */
+
+void exit_shell(void)
 {
 	exit(0);
 }
