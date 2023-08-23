@@ -4,9 +4,10 @@
 /**
  * _strchr - checks if char exists in string
  * @string: parameter
- * @char: parameter
+ * @character: parameter
  * Return: Always 0 (Success)
  */
+
 char *_strchr(char *string, char character)
 {
 	int i = 0;
