@@ -43,17 +43,13 @@ int main(void)
 		{
 			exit_shell();
 		}
-		if (find_command(args[0]))
+		else if (find_command(args[0]) || access(args[0], X_OK) == 0)
 		{
 			execute_command(args);
 		}
-		else if (access(args[0], X_OK) == 0)
-		{
-			execute_path(args);
-		}
 		else
 		{
-			write(STDERR_FILENO, "Command not found, how sad.\n", 29);
+			write(STDERR_FILENO, "Command not found.\n", sizeof("Command not found.\n") - 1);
 		}
 	}
 
