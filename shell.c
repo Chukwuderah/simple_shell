@@ -39,15 +39,16 @@ int main(void)
 		if (arg_count == 0)
 			continue;
 
+		if (_strcmp(args[0], "exit") == 0)
+		{
+			exit_shell();
+		}
 		if (find_command(args[0]))
 		{
-			printf("This is a command, and it's getting here! The execute command
-					is getting called! %i\n", find_command(args[0]));
 			execute_command(args);
 		}
 		else if (access(args[0], X_OK) == 0)
 		{
-			printf("This is a path! It will be found!");
 			execute_path(args);
 		}
 		else

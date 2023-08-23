@@ -19,8 +19,6 @@ char *_getenv(const char *name)
 	char **env = environ;
 	int i;
 
-	printf("Getting environment variable: %s\n", name);
-
 	for (i = 0; env[i] != NULL; i++)
 	{
 		if (_strncmp(env[i], name, _strlen(name)) == 0)
@@ -30,6 +28,11 @@ char *_getenv(const char *name)
 
 		env++;
 	}
-	printf("Environment variable %s not found. Returning Null.\n", name);
+
 	return (NULL);
+}
+
+void exit_shell()
+{
+	exit(0);
 }
