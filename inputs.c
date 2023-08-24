@@ -72,7 +72,7 @@ bool find_command(const char *command)
 			}
 		}
 	}
-
+	printf("Path not found.");
 	return (false);
 }
 

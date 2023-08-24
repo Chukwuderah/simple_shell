@@ -21,9 +21,9 @@ char *_getenv(const char *name)
 
 	for (i = 0; env[i] != NULL; i++)
 	{
-		if (_strncmp(env[i], name, _strlen(name)) == 0)
+		if (strncmp(env[i], name, _strlen(name)) == 0)
 		{
-			return (&(env[i][strlen(name) + 1]));
+			return (&(env[i][_strlen(name) + 1]));
 		}
 
 		env++;
